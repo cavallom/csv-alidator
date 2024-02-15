@@ -66,7 +66,7 @@ console.log(csvalidator.booleanValidation('path-to-csv-file'));
 ```bash
 /**
  * Validates a CSV file and retunrs json with information about:
- * execution result and time, CSV files and arrays containing the line numbers with error.
+ * execution result and time, CSV file name, array containing lines numbers with error.
  * Also very useful for quickly finding the wrong records among millions of lines.
  *
  * @param {string} csvFile - The path to the CSV file.

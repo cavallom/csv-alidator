@@ -1,6 +1,10 @@
 const fs = require('node:fs');
 const pjson = require('./package.json');
 
+/**
+ * Just to check the success of the installation, also returns basic package information.
+ * No parameters.
+ */
 function itWorks() {
     return JSON.stringify({"itWorks": "Yes, it works!"
     , "package": pjson.name
@@ -66,7 +70,7 @@ function booleanValidation(csvFile, separator = ',', ignoreEmptyRows = true) {
 
 /**
  * Validates a CSV file and retunrs json with information about:
- * execution result and time, CSV files and arrays containing the line numbers with error.
+ * execution result and time, CSV file name, array containing lines numbers with error.
  * Also very useful for quickly finding the wrong records among millions of lines.
  *
  * @param {string} csvFile - The path to the CSV file.

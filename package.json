@@ -10,7 +10,7 @@
     "CSV",
     "validator"
   ],
-  "author": "Massimo Cavallo",
+  "author": "Massimo Cavallo <m.cavallo@resful.it>",
   "license": "MIT",
   "repository": {
     "type": "git",
