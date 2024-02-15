@@ -1,6 +1,6 @@
 {
   "name": "csv-alidator",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "NPM package to quickly validate a csv file based on RCF 4180 directives",
   "main": "index.js",
   "scripts": {
@@ -12,9 +12,6 @@
   ],
   "author": "Massimo Cavallo",
   "license": "MIT",
-  "dependencies": {
-    "fs": "^0.0.1-security"
-  },
   "repository": {
     "type": "git",
     "url": "https://github.com/cavallom/csv-alidator.git"
