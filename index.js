@@ -1,13 +1,17 @@
 const { performance } = require('perf_hooks');
 const fs = require('fs');
+const pjson = require('./package.json');
 
 function itWorks() {
-    return "Yes, it works!"
+    return JSON.stringify({"itWorks": "Yes, it works!"
+    , "package": pjson.name
+    , "version": pjson.version
+    });
 }
 /**
  * Validates a CSV file.
  *
- * @param {String} csvFile - The path to the CSV file.
+ * @param {string} csvFile - The path to the CSV file.
  * @param {string} separator - The CSV separator character, not mandatory. Default value = ','.
  * @param {boolean} ignoreEmptyRows - Non-mandatory parameter to handle the blank line at the end of the file.
  */
