@@ -1,4 +1,3 @@
-const { performance } = require('perf_hooks');
 const fs = require('fs');
 const pjson = require('./package.json');
 
@@ -16,7 +15,8 @@ function itWorks() {
  * @param {boolean} ignoreEmptyRows - Non-mandatory parameter to handle the blank line at the end of the file.
  */
 function booleanValidation(csvFile, separator = ',', ignoreEmptyRows = true) {
-    const start = performance.now();
+
+    const start = Date.now();
     let result = true;
 
     try
@@ -51,11 +51,13 @@ function booleanValidation(csvFile, separator = ',', ignoreEmptyRows = true) {
                 result = false;
             }
         });
-        const end = performance.now();
-        console.log("executiontime: " + `${(end - start).toFixed(2)}ms.`);
+        const end = Date.now();
+        console.log("executiontime: " + `${(end - start)}ms.`);
     
         return result;
     } catch (error) {
+        const end = Date.now();
+        console.log("executiontime: " + `${(end - start)}ms.`);
         console.log(error.message)
         result = false;
         return result;
