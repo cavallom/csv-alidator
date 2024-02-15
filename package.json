@@ -1,6 +1,6 @@
 {
   "name": "csv-alidator",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "NPM package to quickly validate a csv file based on RCF 4180 directives",
   "main": "index.js",
   "scripts": {

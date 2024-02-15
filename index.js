@@ -42,7 +42,7 @@ function booleanValidation(csvFile, separator = ',', ignoreEmptyRows = true) {
         .map(function (row) {
             while(patternFound = pattern.exec(row))
             {
-                row = row.replace(patternFound, patternFound.toString().replace(',','@'));
+                row = row.replace(patternFound, patternFound.toString().replaceAll(',','@'));
             }
             return row.split(separator);
         });
@@ -103,7 +103,7 @@ function jsonValidation(csvFile, separator = ',', ignoreEmptyRows = true) {
         .map(function (row) {
             while(patternFound = pattern.exec(row))
             {
-                row = row.replace(patternFound, patternFound.toString().replace(',','@'));
+                row = row.replace(patternFound, patternFound.toString().replaceAll(',','@'));
             }
             return row.split(separator);
         });
