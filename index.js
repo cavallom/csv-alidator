@@ -1,4 +1,4 @@
-const fs = require('node:fs');
+const csvReader = require("./utils/csvReader");
 const pjson = require('./package.json');
 
 /**
@@ -12,42 +12,20 @@ function itWorks() {
     });
 }
 /**
- * Validates a CSV file.
+ * Validates a CSV file and return true or false.
  *
  * @param {string} csvFile - The path to the CSV file.
- * @param {string} separator - The CSV separator character, not mandatory. Default value = ','.
+ * @param {string} csvDelimiter - The CSV separator character, not mandatory. Default value = ','.
  * @param {boolean} ignoreEmptyRows - Non-mandatory parameter to handle the blank line at the end of the file.
  */
-function booleanValidation(csvFile, separator = ',', ignoreEmptyRows = true) {
+function booleanValidation(csvFile, csvDelimiter = ',', ignoreEmptyRows = true) {
 
     const start = Date.now();
     let result = true;
 
     try
     {
-        const pattern = /".*?"/g;
-    
-        const csvFileLines = csvFile =>
-        fs
-        .readFileSync(csvFile)
-        .toString('UTF8')
-        .split('\n')
-        .filter(function (el) {
-            if (ignoreEmptyRows) {
-                return el != '';
-            } else {
-                return el == el;
-            }
-        })
-        .map(function (row) {
-            while(patternFound = pattern.exec(row))
-            {
-                row = row.replace(patternFound, patternFound.toString().replaceAll(',','@'));
-            }
-            return row.split(separator);
-        });
-    
-        let rowsInCsv = csvFileLines(csvFile).slice();
+        let rowsInCsv = csvReader.csvFileLines(csvFile, csvDelimiter, ignoreEmptyRows).slice();
         let firstLineLength = rowsInCsv[0].length;
     
         rowsInCsv.forEach(element => {
@@ -74,10 +52,10 @@ function booleanValidation(csvFile, separator = ',', ignoreEmptyRows = true) {
  * Also very useful for quickly finding the wrong records among millions of lines.
  *
  * @param {string} csvFile - The path to the CSV file.
- * @param {string} separator - The CSV separator character, not mandatory. Default value = ','.
+ * @param {string} csvDelimiter - The CSV separator character, not mandatory. Default value = ','.
  * @param {boolean} ignoreEmptyRows - Non-mandatory parameter to handle the blank line at the end of the file.
  */
-function jsonValidation(csvFile, separator = ',', ignoreEmptyRows = true) {
+function jsonValidation(csvFile, csvDelimiter = ',', ignoreEmptyRows = true) {
 
     const start = Date.now();
     let result = true;
@@ -86,33 +64,10 @@ function jsonValidation(csvFile, separator = ',', ignoreEmptyRows = true) {
 
     try
     {
-        const pattern = /".*?"/g;
-    
-        const csvFileLines = csvFile =>
-        fs
-        .readFileSync(csvFile)
-        .toString('UTF8')
-        .split('\n')
-        .filter(function (el) {
-            if (ignoreEmptyRows) {
-                return el != '';
-            } else {
-                return el == el;
-            }
-        })
-        .map(function (row) {
-            while(patternFound = pattern.exec(row))
-            {
-                row = row.replace(patternFound, patternFound.toString().replaceAll(',','@'));
-            }
-            return row.split(separator);
-        });
-    
-        let rowsInCsv = csvFileLines(csvFile).slice();
+        let rowsInCsv = csvReader.csvFileLines(csvFile, csvDelimiter, ignoreEmptyRows).slice();
         let firstLineLength = rowsInCsv[0].length;
     
         rowsInCsv.forEach(function callback(element, index) {
-            //console.log(`${index}: ${element}`);
             if (element.length != firstLineLength) {
                 badRows.push(index + 1);
                 result = false;
@@ -128,7 +83,6 @@ function jsonValidation(csvFile, separator = ',', ignoreEmptyRows = true) {
             result = true;
         }
     
-        //return result;
         return JSON.stringify({ 
             "csvFile": csvFile
             , "executiontime" : `${(executiontime)}ms.`
@@ -143,7 +97,6 @@ function jsonValidation(csvFile, separator = ',', ignoreEmptyRows = true) {
         executiontime = end - start;
         result = false;
 
-        //return result;
         return JSON.stringify({ 
             "csvFile": csvFile
             , "executiontime" : `${(executiontime)}ms.`

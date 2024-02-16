@@ -1,6 +1,6 @@
 # csv-alidator
 
-NPM package written in **JavaScript** to quickly validate a csv file based on **RCF 4180 directives**.
+NPM package written in **JavaScript** to quickly validate a csv file based on **RCF 4180 directives** and find wrong records among millions of lines and many columns.
 
 - [csv-alidator](#csv-alidator)
   - [Installation](#installation)
@@ -46,15 +46,15 @@ console.log(csvalidator.itWorks());
 
 #### booleanValidation
 
-```bash
-/**
- * Validates a CSV file.
- *
- * @param {string} csvFile - The path to the CSV file.
- * @param {string} separator - The CSV separator character, not mandatory. Default value = ','.
- * @param {boolean} ignoreEmptyRows - Non-mandatory parameter to handle the blank line at the end of the file.
- */
+Validates a CSV file giving back true or false.
 
+| Param | Type | Description |
+| ----- | ---- | ----------- |
+| csvFile | string | Path to the CSV file |
+| csvDelimiter | string | The CSV delimiter character, not mandatory. Default value = ',' |
+| ignoreEmptyRows | bool | Non-mandatory parameter to handle the blank line at the end of the file |
+
+```bash
 const csvalidator = require('csv-alidator');
 console.log(csvalidator.booleanValidation('path-to-csv-file'));
 
@@ -63,17 +63,17 @@ console.log(csvalidator.booleanValidation('path-to-csv-file'));
 
 #### jsonValidation
 
-```bash
-/**
- * Validates a CSV file and retunrs json with information about:
- * execution result and time, CSV file name, array containing lines numbers with error.
- * Also very useful for quickly finding the wrong records among millions of lines.
- *
- * @param {string} csvFile - The path to the CSV file.
- * @param {string} separator - The CSV separator character, not mandatory. Default value = ','.
- * @param {boolean} ignoreEmptyRows - Non-mandatory parameter to handle the blank line at the end of the file.
- */
+Validates a CSV file giving back json with information about:
+execution result and time, CSV file name, array containing lines numbers with error.
+Also very useful for quickly finding the wrong records among millions of lines.
 
+| Param | Type | Description |
+| ----- | ---- | ----------- |
+| csvFile | string | Path to the CSV file |
+| csvDelimiter | string | The CSV delimiter character, not mandatory. Default value = ',' |
+| ignoreEmptyRows | bool | Non-mandatory parameter to handle the blank line at the end of the file |
+
+```bash
 const csvalidator = require('csv-alidator');
 console.log(csvalidator.jsonValidation('path-to-csv-file'));
 
