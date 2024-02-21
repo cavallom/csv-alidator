@@ -25,14 +25,15 @@ function booleanValidation(csvFile, csvDelimiter = ',', ignoreEmptyRows = true) 
 
     try
     {
-        let rowsInCsv = csvReader.csvFileLines(csvFile, csvDelimiter, ignoreEmptyRows).slice();
-        let firstLineLength = rowsInCsv[0].length;
-    
-        rowsInCsv.forEach(element => {
-            if (element.length != firstLineLength) {
-                result = false;
-            }
-        });
+        let csvrows = csvReader.csvFileLines(csvFile, csvDelimiter, ignoreEmptyRows);
+        
+        //bidimensional array check to find bad formatting csv
+        if (!Number.isInteger(csvrows.flat().length/csvrows.length)
+            || csvrows.flat().length === csvrows.length)
+        {
+            result = false;
+        }
+
         const end = Date.now();
         console.log("executiontime: " + `${(end - start)}ms.`);
     
@@ -64,15 +65,20 @@ function jsonValidation(csvFile, csvDelimiter = ',', ignoreEmptyRows = true) {
 
     try
     {
-        let rowsInCsv = csvReader.csvFileLines(csvFile, csvDelimiter, ignoreEmptyRows).slice();
-        let firstLineLength = rowsInCsv[0].length;
-    
-        rowsInCsv.forEach(function callback(element, index) {
-            if (element.length != firstLineLength) {
-                badRows.push(index + 1);
-                result = false;
-            }
-        });
+        let csvrows = csvReader.csvFileLines(csvFile, csvDelimiter, ignoreEmptyRows);
+        let firstLineLength = csvrows[0].length;
+        
+        //bidimensional array check to find bad formatting csv
+        if (!Number.isInteger(csvrows.flat().length/csvrows.length)
+            || csvrows.flat().length === csvrows.length)
+        {
+            csvrows.forEach(function callback(element, index) {
+                if (element.length != firstLineLength) {
+                    badRows.push(index + 1);
+                    result = false;
+                }
+            });
+        }
         
         const end = Date.now();
         executiontime = end - start;
@@ -86,7 +92,7 @@ function jsonValidation(csvFile, csvDelimiter = ',', ignoreEmptyRows = true) {
         return JSON.stringify({ 
             "csvFile": csvFile
             , "executiontime" : `${(executiontime)}ms.`
-            , "rowsCount" : rowsInCsv.length
+            , "rowsCount" : csvrows.length
             , "columns" : firstLineLength
             , "badRowsLines": badRows
             , "result" : result
