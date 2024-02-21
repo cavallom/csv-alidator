@@ -121,4 +121,4 @@ console.log(csvalidator.jsonValidation('path-to-csv-file'));
 
 ## License
 
-[MIT](https://opensource.org/license/mit/)
+[MIT](https://opensource.org/blog/license/mit)
