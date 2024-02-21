@@ -1,7 +1,7 @@
 {
   "name": "csv-alidator",
   "version": "1.0.7",
-  "description": "NPM package to quickly validate a csv file based on RCF 4180 directives",
+  "description": "NPM package to quickly validate a csv file based on RCF 4180 directives and find wrong records among millions of lines and many columns.",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
