@@ -50,13 +50,13 @@ Validates a CSV file giving back true or false.
 
 | Param | Type | Description |
 | ----- | ---- | ----------- |
-| csvFile | string | Path to the CSV file |
+| csvFile | string | Path to local CSV file |
 | csvDelimiter | string | The CSV delimiter character, not mandatory. Default value = ',' |
 | ignoreEmptyRows | bool | Non-mandatory parameter to handle the blank line at the end of the file |
 
 ```bash
 const csvalidator = require('csv-alidator');
-console.log(csvalidator.booleanValidation('path-to-csv-file'));
+console.log(csvalidator.booleanValidation('path-to-local-csv-file'));
 
 #output : { bool } > true | false
 ```
@@ -69,16 +69,16 @@ Also very useful for quickly finding the wrong records among millions of lines.
 
 | Param | Type | Description |
 | ----- | ---- | ----------- |
-| csvFile | string | Path to the CSV file |
+| csvFile | string | Path to local CSV file |
 | csvDelimiter | string | The CSV delimiter character, not mandatory. Default value = ',' |
 | ignoreEmptyRows | bool | Non-mandatory parameter to handle the blank line at the end of the file |
 
 ```bash
 const csvalidator = require('csv-alidator');
-console.log(csvalidator.jsonValidation('path-to-csv-file'));
+console.log(csvalidator.jsonValidation('path-to-local-csv-file'));
 
 #output { json } > successful validation: {
-#    "csvFile": "path-to-csv-file",
+#    "csvFile": "path-to-local-csv-file",
 #    "executiontime": "5496ms.",
 #    "rowsCount": 1000001,
 #    "columns": 9,
@@ -88,7 +88,7 @@ console.log(csvalidator.jsonValidation('path-to-csv-file'));
 #}
 
 #output { json } > failed validation: {
-#    "csvFile": "path-to-csv-file",
+#    "csvFile": "path-to-local-csv-file",
 #    "executiontime": "4817ms.",
 #    "rowsCount": 1000001,
 #    "columns": 9,
@@ -101,7 +101,7 @@ console.log(csvalidator.jsonValidation('path-to-csv-file'));
 #}
 
 #output { json } > failed no such file: {
-#    "csvFile": "path-to-csv-file",
+#    "csvFile": "path-to-local-csv-file",
 #    "executiontime": "1ms.",
 #    "rowsCount": null,
 #    "columns": null,

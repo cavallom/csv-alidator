@@ -17,13 +17,18 @@ csvFileLines = function(csvFile, csvDelimiter = ',', ignoreEmptyRows = true) {
     .split('\n')
     .filter(function (el) {
         if (ignoreEmptyRows) {
-            return el.trim() != '';
+            return el.trim();
         } else {
-            return el == el;
+            return el;
         }
     })
     .map(function (row) {
-        return row.match(regex);
+        /**
+         * 1 > remove carriage return line feed
+         * 2 > apply regex
+         * 3 > return empty array if not match
+         */        
+        return row.replace(/[\r\n]/gm, '').match(regex) || [];
     });
 
     return csvLines(csvFile);
